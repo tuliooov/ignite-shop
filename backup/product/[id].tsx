@@ -4,8 +4,8 @@ import Image from "next/image";
 import Head from "next/head";
 import { useState } from "react";
 import Stripe from "stripe";
-import { stripe } from "../../lib/stripe";
-import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
+import { stripe } from "../../src/lib/stripe";
+import { ImageContainer, ProductContainer, ProductDetails } from "../../src/styles/pages/product"
 
 interface ProductProps {
   product: {
