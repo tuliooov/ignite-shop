@@ -24,7 +24,7 @@ export const ProductsApp = ({products}: ProductsAppProps) => {
           return (
             <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
               <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt="" />
+                <Image src={product.imageUrl} width={270} height={250} alt="" />
 
                 <footer>
                   <strong>{product.name}</strong>

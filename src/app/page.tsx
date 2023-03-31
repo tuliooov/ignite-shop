@@ -1,11 +1,12 @@
-import Head from 'next/head'
 import { stripe } from "../lib/stripe"
 import 'keen-slider/keen-slider.min.css'
 import { ProductsApp } from "@/components/pages/home/products"
 import { createProducts } from "@/utils/pages/home"
 
-
-
+export const metadata = {
+  title: 'Home - Ignite Shop',
+  description: 'Shopping created by Ignite Rocketseat',
+}
 
 export default async function Home() {
 
@@ -14,12 +15,6 @@ export default async function Home() {
   }));
 
   return (
-    <>
-      <Head>
-        <title>Home | Ignite Shop</title>
-      </Head>
-
-      <ProductsApp products={products} />
-    </>
+    <ProductsApp products={products} />
   )
 }
