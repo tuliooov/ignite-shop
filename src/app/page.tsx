@@ -11,7 +11,8 @@ export const metadata = {
 export default async function Home() {
 
   const products = createProducts(await stripe.products.list({
-    expand: ['data.default_price']
+    expand: ['data.default_price'],
+    active: true
   }));
 
   return (

@@ -13,7 +13,7 @@ export const ProductsApp = ({products}: ProductsAppProps) => {
 
     const [sliderRef] = useKeenSlider({
         slides: {
-          perView: 3,
+          perView: 2,
           spacing: 48
         }
       });

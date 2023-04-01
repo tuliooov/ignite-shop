@@ -15,6 +15,7 @@ export const createProducts = (response: Stripe.Response<Stripe.ApiList<Stripe.P
       }).format((price.unit_amount || 0) / 100),
     }
   })
+
   return products
 }
 

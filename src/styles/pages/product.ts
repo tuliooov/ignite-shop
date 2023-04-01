@@ -1,12 +1,10 @@
 import { styled } from "..";
 
-export const ProductContainer = styled('main', {
+export const ProductContainer = styled('div', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
-  alignItems: 'stretch',
+  alignItems: 'normal',
   gap: '4rem',
-
-  maxWidth: 1180,
   margin: '0 auto'
 })
 
