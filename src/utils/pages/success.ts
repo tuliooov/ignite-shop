@@ -1,19 +1,12 @@
 import Stripe from "stripe";
 
-export const createSession = (response:  Stripe.Response<Stripe.Checkout.Session & {failed: boolean}>): ISession => {
-
-  if(response.failed){
-    return {
-      failed: true
-    }
-  }
+export const createSession = (response:  Stripe.Response<Stripe.Checkout.Session>): ISession => {
   const session = response
   
   const costumerName = session.customer_details?.name || 'FULANO'
   const product = session.line_items?.data[0].price?.product as Stripe.Product;
 
   return {
-    failed: false,
     costumerName,
     product: {
       name: product.name,
@@ -24,9 +17,8 @@ export const createSession = (response:  Stripe.Response<Stripe.Checkout.Session
 }
 
 export interface ISession {
-  failed: boolean
-  costumerName?: string
-  product?: {
+  costumerName: string
+  product: {
     name: string
     imageUrl: string
   }
