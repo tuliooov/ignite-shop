@@ -18,6 +18,16 @@ interface SuccessProps {
 
 export default async function Success({ searchParams: { session_id } }: SuccessProps) {
 
+  if (!session_id) {
+    return (
+      <div>
+        <p>
+          Oppps... dados não identificados
+        </p>
+      </div>
+    )
+  }
+
   const sessionId = String(session_id);
   const {costumerName, product} = createSession(await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ['line_items', 'line_items.data.price.product']
