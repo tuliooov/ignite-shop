@@ -6,7 +6,7 @@ import { ImageContainer, SuccessContainer } from "@/styles/pages/success";
 import { createSession } from "@/utils/pages/success";
 
 export const metadata = {
-  title: 'Compra Realizada | Ignite Shop',
+  title: 'Compra Realizada | Photo Shop',
   description: 'Shopping created by Ignite Rocketseat',
 }
 
@@ -20,16 +20,12 @@ interface SuccessProps {
 export default async function Success({ searchParams: { session_id } }: SuccessProps) {
 
   if (!session_id) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      }
-    }
+    return (
+      null
+    )
   }
 
   const sessionId = String(session_id);
-
   const {costumerName, product} = createSession(await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ['line_items', 'line_items.data.price.product']
   }))

@@ -4,7 +4,7 @@ import { ProductsApp } from "@/components/pages/home/products"
 import { createProducts } from "@/utils/pages/home"
 
 export const metadata = {
-  title: 'Home - Ignite Shop',
+  title: 'Home - Photo Shop',
   description: 'Shopping created by Ignite Rocketseat',
 }
 

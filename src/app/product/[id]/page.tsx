@@ -18,7 +18,7 @@ export async function generateMetadata({ params: { id } }: ProductProps) {
     expand: ['default_price']
   }));
   return {
-    title: `${product.name} - Ignite Shop`,
+    title: `${product.name} - Photo Shop`,
     description: 'Shopping created by Ignite Rocketseat',
   }
   

@@ -1,12 +1,12 @@
 import { getCssText } from '@/styles'
 import { globalStyles,  } from '@/styles/global'
-import logoImg from '../assets/Logo.svg'
+import logoImg from '../assets/Logo.png'
 import Image from 'next/image'
 import { Container, Header } from '@/styles/pages/app'
 import { ServerStylesheet } from '@/components/ServerStylesheet'
 
 export const metadata = {
-  title: 'Ignite Shop',
+  title: 'Photo Shop',
   description: 'Shopping created by Ignite Rocketseat',
 }
 
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body>
         <Container>
           <Header>
-            <Image src={logoImg.src} alt={"logo ignite shop"} width={100} height={100} />
+            <Image src={logoImg.src} alt={"logo Photo shop"} width={250} height={100} />
           </Header>
           <main>
             {children}
