@@ -16,23 +16,22 @@ interface SuccessProps {
   }
 }
 
-export default async function Success({ searchParams: { session_id } }: SuccessProps) {
-
-  if (!session_id) {
-    return (
-      <div>
-        <p>
-          Oppps... dados não identificados
-        </p>
-      </div>
-    )
-  }
+export default async function Success({ searchParams: { session_id = '' } }: SuccessProps) {
 
   const sessionId = String(session_id);
-  const {costumerName, product} = createSession(await stripe.checkout.sessions.retrieve(sessionId, {
+  const {costumerName, product, failed} = createSession(await stripe.checkout?.sessions?.retrieve(sessionId, {
     expand: ['line_items', 'line_items.data.price.product']
+  }).then((response) => {
+    return response
+  }).catch((response) => {
+    return { ...response, failed: true}
   }))
 
+
+  if(failed || !product || !costumerName){
+    return <>
+    <p>ops</p></>
+  }
 
   return (
     <>
