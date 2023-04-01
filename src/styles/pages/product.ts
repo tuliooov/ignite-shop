@@ -12,7 +12,7 @@ export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 576,
   minHeight: 450,
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  // background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   borderRadius: 8,
   padding: '0.25rem',
 
@@ -22,6 +22,7 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
+    width: '100%'
   }
 })
 

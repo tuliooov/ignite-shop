@@ -29,7 +29,7 @@ export const ItemProduct = ({product}: ProductsAppProps) => {
     return (
       <ProductContainer>
         <ImageContainer>
-          <Image src={product.imageUrl} width={270} height={250} alt="" />
+          <Image src={product.imageUrl} width={700} height={500} alt="" />
         </ImageContainer>
 
       <ProductDetails>
