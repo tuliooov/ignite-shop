@@ -1,5 +1,4 @@
-import { getCssText } from '@/styles'
-import { globalStyles,  } from '@/styles/global'
+import { globalStyles } from '@/styles/global'
 import logoImg from '../assets/Logo.png'
 import Image from 'next/image'
 import { Container, Header } from '@/styles/pages/app'
@@ -9,6 +8,7 @@ export const metadata = {
   title: 'Photo Shop',
   description: 'Shopping created by Ignite Rocketseat',
 }
+globalStyles()
 
 export default function RootLayout({
   children,
@@ -16,14 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" /> 
         <ServerStylesheet />
       </head>
       <body>
+        {globalStyles()}
         <Container>
           <Header>
             <Image src={logoImg.src} alt={"logo Photo shop"} width={250} height={100} />
@@ -31,8 +29,7 @@ export default function RootLayout({
           <main>
             {children}
           </main>
-        </Container>
-        {globalStyles()}
+        </Container> 
       </body>
     </html>
   )
