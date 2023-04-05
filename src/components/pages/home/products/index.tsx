@@ -1,39 +1,73 @@
 "use client"
 import { useKeenSlider } from 'keen-slider/react'
-import { HomeContainer, Product } from "@/styles/pages/home"
+import { HomeContainer, Product, SliderContainer } from "@/styles/pages/home"
 import { IProduct } from '@/utils/pages/home'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useCallback } from 'react'
+import { ProductProps } from '@/context/CartContext'
+import useEmblaCarousel from 'embla-carousel-react'
+import { Footer } from '../Footer'
+import { CartButton } from '../CartButton'
+import { useCart } from '@/hooks/useCart'
 
 interface ProductsAppProps {
   products: IProduct[]
 }
 
 export const ProductsApp = ({products}: ProductsAppProps) => {
+    const { addToCart, checkIfItemAlreadyExists } = useCart()
 
-    const [sliderRef] = useKeenSlider({
-        slides: {
-          perView: 2,
-          spacing: 48
-        }
-      });
+    const [emblaRef] = useEmblaCarousel({
+      align: 'start',
+      skipSnaps: false,
+      dragFree: true,
+    })
 
+    const handleAddToCart = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>, product: ProductProps) => {
+        event.preventDefault()
+        addToCart(product)
+      },
+      [addToCart],
+    )
+
+    
     return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
-          return (
-            <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
-              <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={700} height={500} alt=""  />
+      <div style={{ overflow: 'hidden', width: '100%' }}>
+        <HomeContainer>
+          <div className="embla" ref={emblaRef}>
+            <SliderContainer className="embla__container container">
+              {products.map((prod) => (
+                <Link
+                  key={prod.id}
+                  href={`/product/${prod.id}`}
+                  prefetch={false}
+                  passHref
+                >
+                  <Product className="embla__slide">
+                    <Image
+                      src={prod.imageUrl}
+                      alt={prod.name}
+                      width={520}
+                      height={480}
+                    />
 
-                <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
-                </footer>
-              </Product>
-            </Link>
-          )
-        })}
-      </HomeContainer>
+                    <Footer name={prod.name} price={prod.price}>
+                      <CartButton
+                        color="green"
+                        size="large"
+                        type="button"
+                        disabled={checkIfItemAlreadyExists(prod.id)}
+                        onClick={(evt) => handleAddToCart(evt, prod)}
+                      />
+                    </Footer>
+                  </Product>
+                </Link>
+              ))}
+            </SliderContainer>
+          </div>
+        </HomeContainer>
+      </div>
     )
 }

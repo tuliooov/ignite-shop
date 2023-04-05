@@ -3,6 +3,7 @@ import logoImg from '../assets/Logo.png'
 import Image from 'next/image'
 import { Container, Header } from '@/styles/pages/app'
 import { ServerStylesheet } from '@/components/ServerStylesheet'
+import { CartContextProvider } from '@/context/CartContext'
 
 export const metadata = {
   title: 'Photo Shop',
@@ -20,17 +21,19 @@ export default function RootLayout({
       <head>
         <ServerStylesheet />
       </head>
-      <body>
-        {globalStyles()}
-        <Container>
-          <Header>
-            <Image src={logoImg.src} alt={"logo Photo shop"} width={250} height={100} />
-          </Header>
-          <main>
-            {children}
-          </main>
-        </Container> 
-      </body>
+      <CartContextProvider>
+        <body>
+            {globalStyles()}
+            <Container>
+              <Header>
+                <Image src={logoImg.src} alt={"logo Photo shop"} width={250} height={100} />
+              </Header>
+              <main>
+                {children}
+              </main>
+            </Container> 
+        </body>
+      </CartContextProvider>
     </html>
   )
 }
