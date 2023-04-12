@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { stripe } from "@/lib/stripe";
-import { ImageContainer, SuccessContainer } from "@/styles/pages/success";
+import { ImageContainer, SuccessContainer, SuccessImageContainer, SuccessSectionImage } from "@/styles/pages/success";
 import { createSession } from "@/utils/pages/success";
 
 export const dynamic = "force-dynamic"
@@ -31,31 +31,33 @@ export default async function Success({ searchParams: { session_id } }: SuccessP
   }
 
   const sessionId = String(session_id);
-  const {costumerName, product} = createSession(await stripe.checkout.sessions.retrieve(sessionId, {
+  const {costumerName, products} = createSession(await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ['line_items', 'line_items.data.price.product']
   }))
 
 
+  const shirtText = products.length <= 1 ? 'camiseta' : 'camisetas'
+
   return (
     <>
-      {/* <Head>
-        <meta name="robots" content="noindex" />
-      </Head> */}
 
       <SuccessContainer>
-        <h1>Compra efetuada</h1>
+        <SuccessSectionImage>
+          {products?.map((product, index) => (
+            <SuccessImageContainer key={product.id} style={{ order: index }}>
+              <Image src={product.imageUrl} alt="" width={120} height={110} />
+            </SuccessImageContainer>
+          ))}
+        </SuccessSectionImage>
 
-        <ImageContainer>
-          <Image src={product.imageUrl} width={150} height={110} alt="" />
-        </ImageContainer>
+        <h1>Compra Efetuada</h1>
 
         <p>
-          Uhuul <strong>{costumerName}</strong>, sua <strong>{product.name}</strong> já está a caminho da sua casa.
+          Uhuul <strong>{costumerName}</strong>, sua compra de{' '}
+          {products?.length} {shirtText} já está a caminho da sua casa.
         </p>
 
-        <Link href="/">
-          Voltar ao catálogo
-        </Link>
+        <Link href="/">Voltar ao catálogo</Link>
       </SuccessContainer>
     </>
   )

@@ -1,9 +1,12 @@
 import { globalStyles } from '@/styles/global'
 import logoImg from '../assets/Logo.png'
 import Image from 'next/image'
-import { Container, Header } from '@/styles/pages/app'
+import { Container,  } from '@/styles/pages/app'
 import { ServerStylesheet } from '@/components/ServerStylesheet'
 import { CartContextProvider } from '@/context/CartContext'
+import Link from 'next/link'
+import { Cart } from '@/components/pages/global/Cart'
+import { Header } from '@/components/pages/global/Header'
 
 export const metadata = {
   title: 'Photo Shop',
@@ -16,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="pt-br">
       <head>
@@ -25,9 +30,7 @@ export default function RootLayout({
         <body>
             {globalStyles()}
             <Container>
-              <Header>
-                <Image src={logoImg.src} alt={"logo Photo shop"} width={250} height={100} />
-              </Header>
+              <Header/>
               <main>
                 {children}
               </main>

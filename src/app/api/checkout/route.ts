@@ -1,21 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "../../../lib/stripe";
+import { IProduct } from "@/context/CartContext";
 
 interface BodyType {
-  priceId: string
+  products: IProduct[]
 }
 
 export async function POST(request: Request) {
   
   const {
-    priceId
+    products
 } = await request.json().then(body => body as BodyType);
 
-  if (!priceId) {
+  if (!products.length) {
     return new Response(JSON.stringify({
-        error: 'Price not found.'
+        error: 'Products not found.'
     }), {
-        status: 400
+        status: 404
     })
   }
 
@@ -26,12 +27,10 @@ export async function POST(request: Request) {
     success_url: successUrl,
     cancel_url: cancelUrl,
     mode: 'payment',
-    line_items: [
-      {
-        price: priceId,
-        quantity: 1,
-      }
-    ]
+    line_items: products.map(({ defaultPriceId }) => ({
+      price: defaultPriceId,
+      quantity: 1,
+    })),
   })
 
   const userUid = request.headers.get('useruid')

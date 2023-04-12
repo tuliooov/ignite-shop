@@ -5,7 +5,7 @@ import produce from 'immer'
 import { ReactNode, useCallback, useState } from 'react'
 import { createContext } from 'use-context-selector'
 
-export interface ProductProps {
+export interface IProduct {
   id: string
   name: string
   imageUrl: string
@@ -16,9 +16,9 @@ export interface ProductProps {
 }
 
 interface CartContextData {
-  cartItems: ProductProps[]
+  cartItems: IProduct[]
   cartTotal: number
-  addToCart: (product: ProductProps) => void
+  addToCart: (product: IProduct) => void
   removeCartItem: (productId: string) => void
   checkIfItemAlreadyExists: (productId: string) => boolean
 }
@@ -30,7 +30,7 @@ interface CartContextProviderProps {
 export const CartContext = createContext({} as CartContextData)
 
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
-  const [cartItems, setCartItems] = useState<ProductProps[]>([])
+  const [cartItems, setCartItems] = useState<IProduct[]>([])
 
   const cartTotal = cartItems.reduce(
     (total, prod) => (total += prod.numberPrice),
@@ -43,7 +43,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
   )
 
   const addToCart = useCallback(
-    (product: ProductProps) => {
+    (product: IProduct) => {
       const hasItemInCart = checkIfItemAlreadyExists(product.id)
 
       const newCart = produce(cartItems, (draft) => {

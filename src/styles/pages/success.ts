@@ -35,6 +35,36 @@ export const SuccessContainer = styled('main', {
   }
 });
 
+export const SuccessSectionImage = styled('section', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: '4.8rem',
+
+  'div + div': {
+    marginLeft: '-5.2rem',
+  },
+})
+
+
+export const SuccessImageContainer = styled('div', {
+  width: '14rem',
+  height: '14rem',
+  background: '$backgroundGradient',
+  boxShadow: '0px 0px 60px rgba(0, 0, 0, 0.8)',
+  borderRadius: '50%',
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  img: {
+    aspectRatio: 1.09,
+    objectFit: 'cover',
+  },
+})
+
+
 export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 130,

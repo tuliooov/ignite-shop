@@ -1,11 +1,9 @@
 "use client"
-import { useKeenSlider } from 'keen-slider/react'
 import { HomeContainer, Product, SliderContainer } from "@/styles/pages/home"
-import { IProduct } from '@/utils/pages/home'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCallback } from 'react'
-import { ProductProps } from '@/context/CartContext'
+import { IProduct } from '@/context/CartContext'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Footer } from '../Footer'
 import { CartButton } from '../CartButton'
@@ -25,7 +23,7 @@ export const ProductsApp = ({products}: ProductsAppProps) => {
     })
 
     const handleAddToCart = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>, product: ProductProps) => {
+      (event: React.MouseEvent<HTMLButtonElement>, product: IProduct) => {
         event.preventDefault()
         addToCart(product)
       },
